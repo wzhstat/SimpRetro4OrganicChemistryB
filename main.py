@@ -83,10 +83,10 @@ def load_global_data(data):
     base_dir = os.path.dirname(os.path.abspath(__file__))
     
     # 1. Parse database path
-    if data.get('databaseName') in ['emol_under_0', 'unrestricted']:
+    if data.get('databaseName') in ['emol_under_0_carbons', 'unrestricted']:
         emolecules_path = None
     else:
-        emolecules_path = os.path.join(base_dir, data.get('databaseName', '') + '_carbons.txt')
+        emolecules_path = os.path.join(base_dir, data.get('databaseName', '') + '.txt')
 
     # 2. Parse template and condition file paths
     tpl_filename = data.get('template_file', 'reaction_template.json')
@@ -226,7 +226,7 @@ def main():
     
     # Basic parameters
     parser.add_argument("-s", "--smiles", type=str, default="CC(=O)C=C(C)C", help="Target SMILES string (default: CC(=O)C=C(C)C)")
-    parser.add_argument("-db", "--database", type=str, default="emol_under_0", help="In-stock database name (default: emol_under_0)")
+    parser.add_argument("-db", "--database", type=str, default="emol_under_0_carbons", help="In-stock database name (default: emol_under_0)")
     parser.add_argument("-o", "--output", type=str, default="retro_result.json", help="Output JSON file path (default: retro_result.json)")
     
     # Custom templates
