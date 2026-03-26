@@ -9,10 +9,9 @@ git clone https://github.com/yourusername/SimpRetro4OrganicChemistryB.git
 cd SimpRetro4OrganicChemistryB
 ```
 
-**2. Create a virtual environment (Recommended)**
-It is highly recommended to use `conda` to manage dependencies, especially for RDKit.
+**2. Create environment**
 ```bash
-conda create -n retro_env python=3.8
+conda create -n retro_env python=3.9
 conda activate retro_env
 ```
 
