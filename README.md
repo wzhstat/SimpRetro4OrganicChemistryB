@@ -57,7 +57,7 @@ python main.py \
 | `--weights` | `-w` | `0.1 0.2 0.5 0.0` | 4 float numbers for the scoring function weights. |
 | `--template` | `-tpl` | `reaction_template.json` | Path to the reaction templates JSON file. |
 | `--condition`| `-cond`| `template_condition.json`| Path to the reaction conditions JSON file. |
-| `--database` | `-db` | `emol_under_0` | In-stock molecules database prefix name. |
+| `--database` | `-db` | `emol_under_0_carbons` | In-stock molecules database prefix name. |
 | `--output` | `-o` | `retro_result.json` | Path to save the final JSON output. |
 
 ### Scoring Weights Explanation ($w_1, w_2, w_3, w_4$)
