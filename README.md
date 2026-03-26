@@ -61,5 +61,13 @@ python main.py \
 | `--database` | `-db` | `emol_under_0` | In-stock molecules database prefix name. |
 | `--output` | `-o` | `retro_result.json` | Path to save the final JSON output. |
 
----
-*Note: Please replace `main.py` with your actual Python script filename.*
+### Scoring Weights Explanation ($w_1, w_2, w_3, w_4$)
+* **$w_1$ (Complexity Reduction / CDScore):** 
+  Favors **convergent synthesis**. It calculates the size disparity between the generated reactants. A higher score is given to reactions that cleave the target molecule into roughly equal-sized fragments, and penalizes linear, one-atom-at-a-time disconnections.
+* **$w_2$ (Availability Score / ASScore):** 
+  Favors **commercially available materials**. It provides a significant bonus if the suggested reactants are found in your `in-stock` database (scaled by the size of the matched fragment). It also penalizes the generation of highly reactive or unstable organometallics (like Mg, Li, Zn) if they are not strictly in-stock.
+* **$w_3$ (Ring Disconnection / RDScore):** 
+  Favors **ring-breaking reactions**. It acts as a binary bonus (1 or 0) given to disconnections that open a ring (meaning the forward reaction is a ring-forming step, like Diels-Alder or macrocyclization), which is a highly strategic move in organic synthesis.
+* **$w_4$ (Site Selectivity / Specificity):** 
+  Favors **chemoselective/regioselective templates**. It is inversely proportional to the number of possible reactive sites found by `rdchiral` for a given template (`1 / len(mapped_results)`). Templates that produce multiple isomeric products (indicating potential selectivity issues) will receive a lower score.
+
