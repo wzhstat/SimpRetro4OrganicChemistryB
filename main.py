@@ -247,7 +247,7 @@ def main():
     parser.add_argument("-w", "--weights", type=float, nargs=4, default=[0.1, 0.2, 0.5, 0.0], 
                         help="Four weights for the scoring function separated by space (default: 0.1 0.2 0.5 0.0)")
     
-    parser.add_argument("-r","--reactants", type=list, default=["CC(=O)C","CC(=O)CC"], help="Optional: Provide reactants SMILES to compute scores directly without running retrosynthesis (format: 'reactant1.reactant2', e.g., 'CCO.CN')")
+    parser.add_argument("-r","--reactants", type=list, default=[], help="Optional: Provide reactants SMILES to compute scores directly without running retrosynthesis (format: 'reactant1.reactant2', e.g., 'CCO.CN')")
     # 
 
     args = parser.parse_args()
