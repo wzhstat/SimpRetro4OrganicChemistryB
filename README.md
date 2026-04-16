@@ -47,7 +47,8 @@ python main.py \
     -w 0.2 0.3 0.5 0.0 \
     -tpl "custom_templates.json" \
     -cond "custom_conditions.json" \
-    -o "my_output.json"
+    -o "my_output.json" \
+    -r ["CC(C)=O"]
 ```
 
 ### Command Line Arguments
@@ -59,6 +60,7 @@ python main.py \
 | `--condition`| `-cond`| `template_condition.json`| Path to the reaction conditions JSON file. |
 | `--database` | `-db` | `emol_under_0_carbons` | In-stock molecules database prefix name. |
 | `--output` | `-o` | `retro_result.json` | Path to save the final JSON output. |
+| `--reactants` | `-r` | `[]` | List of reactant SMILES to add to in-stock set for scoring (default: empty list) |
 
 ### Scoring Weights Explanation ($w_1, w_2, w_3, w_4$)
 * **$w_1$ (Complexity Reduction / CDScore):** 
