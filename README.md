@@ -70,3 +70,18 @@ python main.py \
 * **$w_4$ (Site Selectivity / Specificity):** 
   Favors **chemoselective/regioselective templates**. It is inversely proportional to the number of possible reactive sites found by `rdchiral` for a given template (`1 / len(mapped_results)`). Templates that produce multiple isomeric products (indicating potential selectivity issues) will receive a lower score.
 
+  
+## Preprocessing
+If you want to extract the template by yourself, the following packages need to be installed：
+```
+pip install rxnmapper
+pip inatsll unc_timeout
+```
+When extracting the template, please run:
+```
+python ./template/preprocessing.py \
+    --input_path ./preprocessed_data.csv \
+    --output_path ./reaction_template.json \
+    --condition_path ./template_condition.json \
+    --add_radius_0 False
+```
