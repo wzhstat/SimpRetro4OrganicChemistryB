@@ -106,6 +106,16 @@ def load_global_data(data):
     else:
         raise FileNotFoundError(f"In-stock molecules file not found: {emolecules_path}")
     
+    # add reactants from request data to in_stock for scoring purposes
+    reactants_from_request = data.get('reactants', [])
+    if reactants_from_request:
+        in_stock.update(reactants_from_request)
+        print(f"[Load] Added {len(reactants_from_request)} reactants from request data to in-stock set.")
+    
+    # canonicalize in-stock molecules for consistent matching
+    in_stock = set(canonical_smiles(smiles) for smiles in in_stock if canonical_smiles(smiles) is not None)
+    print(f"[Load] Canonicalized in-stock molecules. Total unique in-stock molecules: {len(in_stock)}")
+    
     # Load reaction templates
     if os.path.exists(template_path):
         with open(template_path, 'r', encoding='utf-8') as f:
@@ -226,7 +236,7 @@ def main():
     
     # Basic parameters
     parser.add_argument("-s", "--smiles", type=str, default="CC(=O)C=C(C)C", help="Target SMILES string (default: CC(=O)C=C(C)C)")
-    parser.add_argument("-db", "--database", type=str, default="emol_under_0_carbons", help="In-stock database name (default: emol_under_0)")
+    parser.add_argument("-db", "--database", type=str, default="emol_under_1_carbons", help="In-stock database name (default: emol_under_0)")
     parser.add_argument("-o", "--output", type=str, default="retro_result.json", help="Output JSON file path (default: retro_result.json)")
     
     # Custom templates
@@ -236,6 +246,9 @@ def main():
     # Custom weights
     parser.add_argument("-w", "--weights", type=float, nargs=4, default=[0.1, 0.2, 0.5, 0.0], 
                         help="Four weights for the scoring function separated by space (default: 0.1 0.2 0.5 0.0)")
+    
+    parser.add_argument("-r","--reactants", type=list, default=["CC(=O)C","CC(=O)CC"], help="Optional: Provide reactants SMILES to compute scores directly without running retrosynthesis (format: 'reactant1.reactant2', e.g., 'CCO.CN')")
+    # 
 
     args = parser.parse_args()
 
@@ -244,7 +257,8 @@ def main():
         'databaseName': args.database,
         'template_file': args.template,
         'condition_file': args.condition,
-        'weights': args.weights
+        'weights': args.weights,
+        'reactants': args.reactants
     }
 
     try:
