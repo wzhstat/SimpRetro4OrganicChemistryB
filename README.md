@@ -77,7 +77,7 @@ python main.py \
 If you want to extract the template by yourself, the following packages need to be installed：
 ```
 pip install rxnmapper
-pip inatsll func_timeout
+pip install func_timeout
 ```
 When extracting the template, please run:
 ```
