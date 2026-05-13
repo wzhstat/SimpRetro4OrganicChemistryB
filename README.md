@@ -82,8 +82,8 @@ pip install func_timeout
 When extracting the template, please run:
 ```
 python ./template/preprocessing.py \
-    --input_path ./preprocessed_data.csv \
-    --output_path ./reaction_template.json \
-    --condition_path ./template_condition.json \
+    --input_path ./template/preprocessed_data.csv \
+    --output_path ./template/reaction_template.json \
+    --condition_path ./template/template_condition.json \
     --add_radius_0 False
 ```
